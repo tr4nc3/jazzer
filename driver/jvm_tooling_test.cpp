@@ -41,7 +41,7 @@ class JvmToolingTest : public ::testing::Test {
   // process, so we set up a single JVM instance for this test binary which gets
   // destroyed after all tests in this test suite have finished.
   static void SetUpTestCase() {
-    FLAGS_jvm_args = "-Denv1=val1;-Denv2=val2";
+    FLAGS_jvm_args = "-Denv1=val1+-Denv2=val2";
     FLAGS_instrumentation_excludes = "**";
 
     jvm_ = std::make_unique<JVM>("test_executable");

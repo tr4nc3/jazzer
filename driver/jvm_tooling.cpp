@@ -32,7 +32,7 @@ DEFINE_string(cp, ".",
               "instrumentor "
               "runtime and further dependencies separated by a colon \":\"");
 DEFINE_string(jvm_args, "",
-              "arguments passed to the jvm separated by semicolon \";\"");
+              "arguments passed to the jvm separated by plus \"+\"");
 DEFINE_string(agent_path, "", "location of the fuzzing instrumentation agent");
 
 // Arguments that are passed to the instrumentation agent.
@@ -160,7 +160,7 @@ JVM::JVM(const std::string &executable_path) {
   // add additional jvm options set through command line flags
   std::vector<std::string> jvm_args;
   if (!FLAGS_jvm_args.empty()) {
-    jvm_args = absl::StrSplit(FLAGS_jvm_args, ';');
+    jvm_args = absl::StrSplit(FLAGS_jvm_args, '+');
   }
   for (const auto &arg : jvm_args) {
     options.push_back(
